@@ -1,0 +1,142 @@
+.App {
+    min-height: 100lvh;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.align-h {
+    align-items: center;
+}
+
+.align-v {
+    justify-content: center;
+}
+
+.welcome {
+    flex: 8;
+}
+
+.welcome .title {
+    font-size: 48px;
+    text-align: center;
+}
+
+.welcome .sub {
+    font-size: 36px;
+    font-style: italic;
+}
+
+.welcome-second {
+    flex: 2;
+    min-height: fit-content;
+    justify-content: space-between;
+}
+
+.welcome-second p {
+    padding: 10px;
+}
+
+.button {
+    background-color: antiquewhite;
+    padding: 8px 20px;
+    color: #000;
+}
+
+.button:hover {
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+
+.rules {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding: 20px 20px 10px;
+    position: relative;
+}
+
+.rules h3 {
+    display: inline-block;
+    position: absolute;
+    top: -15px;
+    background-color: white;
+    padding: 0 10px;
+}
+
+.rules img {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.border {
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.player {
+    padding-top: 20px ;
+}
+
+.player p {
+    background-color: lightgray;
+    padding: 10px;
+    margin-top: 20px;
+    white-space: pre-wrap;
+}
+.player .avatar {
+    height: 250px;
+    width: 250px;
+}
+
+.player .num-col {
+    flex: 1;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+
+.player .digit {
+    font-size: 80px;
+    width: 124px;
+    margin-top: 20px;
+}
+
+.button-footer {
+    align-items: flex-end;
+    justify-content: space-between;
+    flex: 1;
+    padding: 20px 0;
+}
+
+.host .name {
+    padding: 8px 20px;
+    font-size: larger;
+}
+
+.host .timer {
+    padding: 20px 0;
+    justify-content: center;
+    flex: 1;
+}
+.timer * {
+    margin: 0 10px;
+}
+
+.timer .button {
+    font-size: 36px;
+    padding: 0 10px;
+    width: 60px;
+}
+.timer span {
+    font-size: 50px;
+}
