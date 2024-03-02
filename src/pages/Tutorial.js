@@ -1,3 +1,6 @@
+import Button from "../components/Button";
+import { Link } from "react-router-dom";
+
 export default function Tutorial() {
   return (
     <div className="App">
@@ -20,7 +23,7 @@ export default function Tutorial() {
       </div>
       <div className="rules border">
         <h3>Player:</h3>
-        <img src="/img/tutorial/player.png" />
+        <img src="/img/tutorial/player.png" alt="Player card" />
         <p>
           This is an example of a player card. Here we have the wonderful (yet
           unstable) Cassie! Based on the information we’re given, and based on
@@ -37,7 +40,7 @@ export default function Tutorial() {
       </div>
       <div className="rules border">
         <h3>Host: </h3>
-        <img src="/img/tutorial/host.png" />
+        <img src="/img/tutorial/host.png" alt="location card" />
         <p>
           And wrapping up this extensive tutorial, we have a location card. In
           every event on a location, there will be a mention of a player that
@@ -50,6 +53,11 @@ export default function Tutorial() {
           order to get as much money as possible. Anyway, that’s the end of the
           tutorial, feel free to ignore rules one and two, thanks and have fun.
         </p>
+      </div>
+      <div className="flex row button-footer">
+        <Link to="/">
+          <Button className="animate__animated animate__fadeInUp">Back</Button>
+        </Link>
       </div>
     </div>
   );
