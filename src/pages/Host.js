@@ -2,6 +2,8 @@ import data from "../data.json";
 import Button from "../components/Button";
 import { useEffect, useRef, useState } from "react";
 import randomizeArray from "../utils/randomizeArray";
+import { sanitizeName } from "../utils/sanitizeName";
+import { genRandom } from "../utils/genRandom";
 import { Link } from "react-router-dom";
 import { useTimer } from "react-timer-hook";
 
@@ -11,7 +13,8 @@ export default function Player() {
   const players = useRef([]);
   const [player, setPlayer] = useState({});
   const [periodId, setPeriodId] = useState(2); // 5 mins
-  const image = `/img/Locations/${player.name?.replace(" ", "")}.png`;
+  const image = `/img/Locations/${sanitizeName(player.name)}.png`;
+  const random = useRef(null);
   const getExpiry = (periodId) => {
     const now = new Date();
     const expiry = now.setSeconds(
@@ -19,26 +22,28 @@ export default function Player() {
     );
     return expiry;
   };
-  const { seconds, minutes, isRunning, start, restart } = useTimer({
-    expiryTimestamp: getExpiry(periodId),
-    autoStart: false,
-  });
+  const { seconds, minutes, isRunning, start, resume, pause, restart } =
+    useTimer({
+      expiryTimestamp: getExpiry(periodId),
+      autoStart: false,
+    });
   const reRoll = () => {
     if (players.current.length === 0) {
       players.current = randomizeArray(data.hosts);
     }
     const newPlayer = players.current.pop();
     setPlayer(newPlayer);
-    restart(getExpiry(periodId));
+    random.current = genRandom(3);
+    restart(getExpiry(periodId), false);
   };
   const increasePeriod = () => {
     const newPeriodId = Math.min(periodId + 1, timePeriods.length - 1);
-    restart(getExpiry(newPeriodId));
+    restart(getExpiry(newPeriodId), isRunning);
     setPeriodId(newPeriodId);
   };
   const decreasePeriod = () => {
     const newPeriodId = Math.max(0, periodId - 1);
-    restart(getExpiry(newPeriodId));
+    restart(getExpiry(newPeriodId), isRunning);
     setPeriodId(newPeriodId);
   };
 
@@ -53,7 +58,7 @@ export default function Player() {
         <div className="flex num-col align-h">
           <h3 className="border name">{player.name}</h3>
           <div className="digit border align-v align-h flex">
-            {player.i + 1}
+            {random.current}
           </div>
         </div>
       </div>
@@ -71,10 +76,16 @@ export default function Player() {
           <Button className="animate__animated animate__fadeInUp">Back</Button>
         </Link>
         <Button
-          onClick={() => (isRunning ? restart(getExpiry(periodId)) : start())}
+          onClick={isRunning ? pause : resume}
           className="animate__animated animate__fadeInUp"
         >
-          {isRunning ? "Reset" : "Start"}
+          {isRunning ? "Pause" : "Start"}
+        </Button>
+        <Button
+          onClick={() => restart(getExpiry(periodId), isRunning)}
+          className="animate__animated animate__fadeInUp"
+        >
+          Reset
         </Button>
         <Button
           onClick={reRoll}

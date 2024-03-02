@@ -20,7 +20,7 @@ export default function Tutorial() {
       </div>
       <div className="rules border">
         <h3>Player:</h3>
-        <img src="/img/32.png" />
+        <img src="/img/tutorial/player.png" />
         <p>
           This is an example of a player card. Here we have the wonderful (yet
           unstable) Cassie! Based on the information we’re given, and based on
@@ -37,7 +37,7 @@ export default function Tutorial() {
       </div>
       <div className="rules border">
         <h3>Host: </h3>
-        <img src="/img/33.png" />
+        <img src="/img/tutorial/host.png" />
         <p>
           And wrapping up this extensive tutorial, we have a location card. In
           every event on a location, there will be a mention of a player that

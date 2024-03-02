@@ -2,20 +2,24 @@ import data from "../data.json";
 import Button from "../components/Button";
 import { useEffect, useRef, useState } from "react";
 import randomizeArray from "../utils/randomizeArray";
+import { sanitizeName } from "../utils/sanitizeName";
+import { genRandom } from "../utils/genRandom";
 import { Link } from "react-router-dom";
 
 export default function Player() {
   const players = useRef([]);
   const [player, setPlayer] = useState({});
+  const random = useRef(null);
   const reRoll = () => {
     if (players.current.length === 0) {
       players.current = randomizeArray(data.players);
     }
+    random.current = genRandom(4);
     const newPlayer = players.current.pop();
     setPlayer(newPlayer);
   };
-  const image = `/img/Characters/${player.name}.png`;
-  const nameImg = `/img/Characters/NameImages/${player.name}Name.png`;
+  const image = `/img/Characters/${sanitizeName(player.name)}.png`;
+  const nameImg = `/img/Characters/NameImages/${sanitizeName(player.name)}Name.png`;
 
   useEffect(() => {
     reRoll();
@@ -26,9 +30,9 @@ export default function Player() {
       <div className="flex row align-h top">
         <img className="avatar border" src={image} />
         <div className="flex num-col align-h">
-          <img src={nameImg} />
+          {player.noNameImage ? <h3>{player.name}</h3> : <img src={nameImg} />}
           <div className="digit border align-v align-h flex">
-            {player.i + 1}
+            {random.current}
           </div>
         </div>
       </div>
